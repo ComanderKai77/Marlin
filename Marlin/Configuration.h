@@ -949,7 +949,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE \
   {                          \
-    400, 400, 2, 45          \
+    200, 200, 3, 45          \
   }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -1209,18 +1209,18 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    -30, 46, 0                 \
+    -34, -47, 0                \
   }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-//#define PROBING_MARGIN 0
+//#define PROBING_MARGIN 50
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (30 * 60)
+#define XY_PROBE_FEEDRATE (50 * 60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (30 * 60)
+#define Z_PROBE_FEEDRATE_FAST (20 * 60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1261,7 +1261,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
@@ -1565,9 +1565,9 @@
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
  */
-#define AUTO_BED_LEVELING_3POINT
+//#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -1582,7 +1582,7 @@
 /**
  * Auto-leveling needs preheating
  */
-#define PREHEAT_BEFORE_LEVELING
+//#define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
 #define LEVELING_NOZZLE_TEMP 0 // (°C) Only applies to E0 at this time
 #define LEVELING_BED_TEMP 60
@@ -1634,7 +1634,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
 // Set the number of grid points per dimension.
-#define GRID_MAX_POINTS_X 2
+#define GRID_MAX_POINTS_X 3
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
 // Probe along the Y axis, advancing X after each column
@@ -1712,10 +1712,10 @@
 #if ENABLED(LEVEL_BED_CORNERS)
 #define LEVEL_CORNERS_INSET_LFRB \
   {                              \
-    30, 30, 30, 30               \
-  }                              // (mm) Left, Front, Right, Back insets
-#define LEVEL_CORNERS_HEIGHT 0.0 // (mm) Z height of nozzle at leveling points
-#define LEVEL_CORNERS_Z_HOP 4.0  // (mm) Z height of nozzle between leveling points
+    0, 0, 0, 0                   \
+  }                            // (mm) Left, Front, Right, Back insets
+#define LEVEL_CORNERS_HEIGHT 0 // (mm) Z height of nozzle at leveling points
+#define LEVEL_CORNERS_Z_HOP 0  // (mm) Z height of nozzle between leveling points
 //#define LEVEL_CENTER_TOO              // Move to the center after the last corner
 //#define LEVEL_CORNERS_USE_PROBE
 #if ENABLED(LEVEL_CORNERS_USE_PROBE)
@@ -1784,7 +1784,7 @@
 // Homing speeds (mm/min)
 #define HOMING_FEEDRATE_MM_M        \
   {                                 \
-    (30 * 60), (30 * 60), (10 * 60) \
+    (60 * 60), (60 * 60), (10 * 60) \
   }
 
 // Validate that endstops are triggered on homing moves
@@ -1895,17 +1895,17 @@
 //
 // Preheat Constants - Up to 5 are supported without changes
 //
-#define PREHEAT_1_LABEL "PLA 250"
-#define PREHEAT_1_TEMP_HOTEND 250
+#define PREHEAT_1_LABEL "PLA 210"
+#define PREHEAT_1_TEMP_HOTEND 210
 #define PREHEAT_1_TEMP_BED 60
 #define PREHEAT_1_TEMP_CHAMBER 0
 #define PREHEAT_1_FAN_SPEED 0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL "PLA 230"
+/*#define PREHEAT_2_LABEL "PLA 230"
 #define PREHEAT_2_TEMP_HOTEND 230
 #define PREHEAT_2_TEMP_BED 60
 #define PREHEAT_2_TEMP_CHAMBER 0
-#define PREHEAT_2_FAN_SPEED 0 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED 0 // Value from 0 to 255*/
 
 /**
  * Nozzle Park
