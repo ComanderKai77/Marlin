@@ -637,7 +637,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -654,9 +654,9 @@
 //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
 // 12v (120 watt?) MK2a PCB Heatbed into 4mm borosilicate (Geeetech Průša i3 Pro, Pro/B/C/X)
-#define DEFAULT_bedKp 234.88
-#define DEFAULT_bedKi 42.79
-#define DEFAULT_bedKd 322.28
+#define DEFAULT_bedKp 53.11
+#define DEFAULT_bedKi 4.44
+#define DEFAULT_bedKd 423.44
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
