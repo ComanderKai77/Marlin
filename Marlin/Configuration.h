@@ -1512,12 +1512,12 @@
 // Commands to execute on filament runout.
 // With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
 // NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
-#define FILAMENT_RUNOUT_SCRIPT "M300 S500 P400 M600"
+#define FILAMENT_RUNOUT_SCRIPT "M600"
 
 // After a runout is detected, continue printing this length of filament
 // before executing the runout script. Useful for a sensor at the end of
 // a feed tube. Requires 4 bytes SRAM per sensor, plus 4 bytes overhead.
-#define FILAMENT_RUNOUT_DISTANCE_MM 25
+#define FILAMENT_RUNOUT_DISTANCE_MM 40
 
 #ifdef FILAMENT_RUNOUT_DISTANCE_MM
 // Enable this option to use an encoder disc that toggles the runout pin
@@ -1924,7 +1924,7 @@
 // Specify a park position as { X, Y, Z_raise }
 #define NOZZLE_PARK_POINT                  \
   {                                        \
-    (X_MIN_POS + 10), (Y_MIN_POS + 10), 20 \
+    (X_MIN_POS + 20), (Y_MIN_POS + 20), 20 \
   }
 //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
 //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
