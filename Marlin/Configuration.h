@@ -1209,7 +1209,7 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    -34, -47, 0                \
+    -10, 75, 0                 \
   }
 
 // Most probes should stay away from the edges of the bed, but
@@ -1217,7 +1217,7 @@
 //#define PROBING_MARGIN 50
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (50 * 60)
+#define XY_PROBE_FEEDRATE (120 * 60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (20 * 60)
@@ -1777,8 +1777,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-#define Z_SAFE_HOMING_X_POINT X_CENTER // X point for Z homing
-#define Z_SAFE_HOMING_Y_POINT Y_CENTER // Y point for Z homing
+#define Z_SAFE_HOMING_X_POINT 50  // X point for Z homing
+#define Z_SAFE_HOMING_Y_POINT 120 // Y point for Z homing
 #endif
 
 // Homing speeds (mm/min)
