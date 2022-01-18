@@ -255,12 +255,12 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-#define THERMAL_PROTECTION_PERIOD 40    // Seconds
-#define THERMAL_PROTECTION_HYSTERESIS 4 // Degrees Celsius
+#define THERMAL_PROTECTION_PERIOD 60    // Seconds
+#define THERMAL_PROTECTION_HYSTERESIS 5 // Degrees Celsius
 
-//#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
+#define ADAPTIVE_FAN_SLOWING // Slow part cooling fan if temperature drops
 #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
-//#define NO_FAN_SLOWING_IN_PID_TUNING    // Don't slow fan speed during M303
+#define NO_FAN_SLOWING_IN_PID_TUNING // Don't slow fan speed during M303
 #endif
 
 /**
@@ -3842,9 +3842,9 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
-//#define HOST_PROMPT_SUPPORT
+#define HOST_PROMPT_SUPPORT
 //#define HOST_START_MENU_ITEM  // Add a menu item that tells the host to start
 #endif
 
