@@ -562,7 +562,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP 125
+#define BED_MAXTEMP 100
 #define CHAMBER_MAXTEMP 60
 
 /**
@@ -637,7 +637,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -654,9 +654,9 @@
 //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
 // 12v (120 watt?) MK2a PCB Heatbed into 4mm borosilicate (Geeetech Průša i3 Pro, Pro/B/C/X)
-#define DEFAULT_bedKp 53.11
-#define DEFAULT_bedKi 4.44
-#define DEFAULT_bedKd 423.44
+#define DEFAULT_bedKp 33.85
+#define DEFAULT_bedKi 6.56
+#define DEFAULT_bedKd 116.46
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1409,7 +1409,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS (-X_MIN_POS + X_BED_SIZE)
 #define Y_MAX_POS (-Y_MIN_POS + Y_BED_SIZE)
-#define Z_MAX_POS 180
+#define Z_MAX_POS 170
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1616,8 +1616,8 @@
 #define LEVELED_SEGMENT_LENGTH 5.0 // (mm) Length of all segments (except the last one)
 
 /**
-   * Enable the G26 Mesh Validation Pattern tool.
-   */
+ * Enable the G26 Mesh Validation Pattern tool.
+ */
 //#define G26_MESH_VALIDATION
 #if ENABLED(G26_MESH_VALIDATION)
 #define MESH_TEST_NOZZLE_SIZE 0.4  // (mm) Diameter of primary nozzle.
@@ -1725,22 +1725,22 @@
 #endif
 
 /**
-   * Corner Leveling Order
-   *
-   * Set 2 or 4 points. When 2 points are given, the 3rd is the center of the opposite edge.
-   *
-   *  LF  Left-Front    RF  Right-Front
-   *  LB  Left-Back     RB  Right-Back
-   *
-   * Examples:
-   *
-   *      Default        {LF,RB,LB,RF}         {LF,RF}           {LB,LF}
-   *  LB --------- RB   LB --------- RB    LB --------- RB   LB --------- RB
-   *  |  4       3  |   | 3         2 |    |     <3>     |   | 1           |
-   *  |             |   |             |    |             |   |          <3>|
-   *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
-   *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
-   */
+ * Corner Leveling Order
+ *
+ * Set 2 or 4 points. When 2 points are given, the 3rd is the center of the opposite edge.
+ *
+ *  LF  Left-Front    RF  Right-Front
+ *  LB  Left-Back     RB  Right-Back
+ *
+ * Examples:
+ *
+ *      Default        {LF,RB,LB,RF}         {LF,RF}           {LB,LF}
+ *  LB --------- RB   LB --------- RB    LB --------- RB   LB --------- RB
+ *  |  4       3  |   | 3         2 |    |     <3>     |   | 1           |
+ *  |             |   |             |    |             |   |          <3>|
+ *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
+ *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
+ */
 #define LEVEL_CORNERS_LEVELING_ORDER \
   {                                  \
     LF, RF, RB, LB                   \
