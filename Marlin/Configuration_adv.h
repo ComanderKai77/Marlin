@@ -264,17 +264,17 @@
 #endif
 
 /**
-   * Whenever an M104, M109, or M303 increases the target temperature, the
-   * firmware will wait for the WATCH_TEMP_PERIOD to expire. If the temperature
-   * hasn't increased by WATCH_TEMP_INCREASE degrees, the machine is halted and
-   * requires a hard reset. This test restarts with any M104/M109/M303, but only
-   * if the current temperature is far enough below the target for a reliable
-   * test.
-   *
-   * If you get false positives for "Heating failed", increase WATCH_TEMP_PERIOD
-   * and/or decrease WATCH_TEMP_INCREASE. WATCH_TEMP_INCREASE should not be set
-   * below 2.
-   */
+ * Whenever an M104, M109, or M303 increases the target temperature, the
+ * firmware will wait for the WATCH_TEMP_PERIOD to expire. If the temperature
+ * hasn't increased by WATCH_TEMP_INCREASE degrees, the machine is halted and
+ * requires a hard reset. This test restarts with any M104/M109/M303, but only
+ * if the current temperature is far enough below the target for a reliable
+ * test.
+ *
+ * If you get false positives for "Heating failed", increase WATCH_TEMP_PERIOD
+ * and/or decrease WATCH_TEMP_INCREASE. WATCH_TEMP_INCREASE should not be set
+ * below 2.
+ */
 #define WATCH_TEMP_PERIOD 20  // Seconds
 #define WATCH_TEMP_INCREASE 2 // Degrees Celsius
 #endif
@@ -287,8 +287,8 @@
 #define THERMAL_PROTECTION_BED_HYSTERESIS 2 // Degrees Celsius
 
 /**
-   * As described above, except for the bed (M140/M190/M303).
-   */
+ * As described above, except for the bed (M140/M190/M303).
+ */
 #define WATCH_BED_TEMP_PERIOD 60  // Seconds
 #define WATCH_BED_TEMP_INCREASE 2 // Degrees Celsius
 #endif
@@ -301,8 +301,8 @@
 #define THERMAL_PROTECTION_CHAMBER_HYSTERESIS 2 // Degrees Celsius
 
 /**
-   * Heated chamber watch settings (M141/M191).
-   */
+ * Heated chamber watch settings (M141/M191).
+ */
 #define WATCH_CHAMBER_TEMP_PERIOD 60  // Seconds
 #define WATCH_CHAMBER_TEMP_INCREASE 2 // Degrees Celsius
 #endif
@@ -315,8 +315,8 @@
 #define THERMAL_PROTECTION_COOLER_HYSTERESIS 3 // Degrees Celsius
 
 /**
-   * Laser cooling watch settings (M143/M193).
-   */
+ * Laser cooling watch settings (M143/M193).
+ */
 #define WATCH_COOLER_TEMP_PERIOD 60  // Seconds
 #define WATCH_COOLER_TEMP_INCREASE 3 // Degrees Celsius
 #endif
@@ -331,33 +331,33 @@
 #endif
 
 /**
-   * Add an experimental additional term to the heater power, proportional to the fan speed.
-   * A well-chosen Kf value should add just enough power to compensate for power-loss from the cooling fan.
-   * You can either just add a constant compensation with the DEFAULT_Kf value
-   * or follow the instruction below to get speed-dependent compensation.
-   *
-   * Constant compensation (use only with fanspeeds of 0% and 100%)
-   * ---------------------------------------------------------------------
-   * A good starting point for the Kf-value comes from the calculation:
-   *   kf = (power_fan * eff_fan) / power_heater * 255
-   * where eff_fan is between 0.0 and 1.0, based on fan-efficiency and airflow to the nozzle / heater.
-   *
-   * Example:
-   *   Heater: 40W, Fan: 0.1A * 24V = 2.4W, eff_fan = 0.8
-   *   Kf = (2.4W * 0.8) / 40W * 255 = 12.24
-   *
-   * Fan-speed dependent compensation
-   * --------------------------------
-   * 1. To find a good Kf value, set the hotend temperature, wait for it to settle, and enable the fan (100%).
-   *    Make sure PID_FAN_SCALING_LIN_FACTOR is 0 and PID_FAN_SCALING_ALTERNATIVE_DEFINITION is not enabled.
-   *    If you see the temperature drop repeat the test, increasing the Kf value slowly, until the temperature
-   *    drop goes away. If the temperature overshoots after enabling the fan, the Kf value is too big.
-   * 2. Note the Kf-value for fan-speed at 100%
-   * 3. Determine a good value for PID_FAN_SCALING_MIN_SPEED, which is around the speed, where the fan starts moving.
-   * 4. Repeat step 1. and 2. for this fan speed.
-   * 5. Enable PID_FAN_SCALING_ALTERNATIVE_DEFINITION and enter the two identified Kf-values in
-   *    PID_FAN_SCALING_AT_FULL_SPEED and PID_FAN_SCALING_AT_MIN_SPEED. Enter the minimum speed in PID_FAN_SCALING_MIN_SPEED
-   */
+ * Add an experimental additional term to the heater power, proportional to the fan speed.
+ * A well-chosen Kf value should add just enough power to compensate for power-loss from the cooling fan.
+ * You can either just add a constant compensation with the DEFAULT_Kf value
+ * or follow the instruction below to get speed-dependent compensation.
+ *
+ * Constant compensation (use only with fanspeeds of 0% and 100%)
+ * ---------------------------------------------------------------------
+ * A good starting point for the Kf-value comes from the calculation:
+ *   kf = (power_fan * eff_fan) / power_heater * 255
+ * where eff_fan is between 0.0 and 1.0, based on fan-efficiency and airflow to the nozzle / heater.
+ *
+ * Example:
+ *   Heater: 40W, Fan: 0.1A * 24V = 2.4W, eff_fan = 0.8
+ *   Kf = (2.4W * 0.8) / 40W * 255 = 12.24
+ *
+ * Fan-speed dependent compensation
+ * --------------------------------
+ * 1. To find a good Kf value, set the hotend temperature, wait for it to settle, and enable the fan (100%).
+ *    Make sure PID_FAN_SCALING_LIN_FACTOR is 0 and PID_FAN_SCALING_ALTERNATIVE_DEFINITION is not enabled.
+ *    If you see the temperature drop repeat the test, increasing the Kf value slowly, until the temperature
+ *    drop goes away. If the temperature overshoots after enabling the fan, the Kf value is too big.
+ * 2. Note the Kf-value for fan-speed at 100%
+ * 3. Determine a good value for PID_FAN_SCALING_MIN_SPEED, which is around the speed, where the fan starts moving.
+ * 4. Repeat step 1. and 2. for this fan speed.
+ * 5. Enable PID_FAN_SCALING_ALTERNATIVE_DEFINITION and enter the two identified Kf-values in
+ *    PID_FAN_SCALING_AT_FULL_SPEED and PID_FAN_SCALING_AT_MIN_SPEED. Enter the minimum speed in PID_FAN_SCALING_MIN_SPEED
+ */
 //#define PID_FAN_SCALING
 #if ENABLED(PID_FAN_SCALING)
 //#define PID_FAN_SCALING_ALTERNATIVE_DEFINITION
@@ -787,64 +787,64 @@
 
 #if ENABLED(BLTOUCH)
 /**
-   * Either: Use the defaults (recommended) or: For special purposes, use the following DEFINES
-   * Do not activate settings that the probe might not understand. Clones might misunderstand
-   * advanced commands.
-   *
-   * Note: If the probe is not deploying, do a "Reset" and "Self-Test" and then check the
-   *       wiring of the BROWN, RED and ORANGE wires.
-   *
-   * Note: If the trigger signal of your probe is not being recognized, it has been very often
-   *       because the BLACK and WHITE wires needed to be swapped. They are not "interchangeable"
-   *       like they would be with a real switch. So please check the wiring first.
-   *
-   * Settings for all BLTouch and clone probes:
-   */
+ * Either: Use the defaults (recommended) or: For special purposes, use the following DEFINES
+ * Do not activate settings that the probe might not understand. Clones might misunderstand
+ * advanced commands.
+ *
+ * Note: If the probe is not deploying, do a "Reset" and "Self-Test" and then check the
+ *       wiring of the BROWN, RED and ORANGE wires.
+ *
+ * Note: If the trigger signal of your probe is not being recognized, it has been very often
+ *       because the BLACK and WHITE wires needed to be swapped. They are not "interchangeable"
+ *       like they would be with a real switch. So please check the wiring first.
+ *
+ * Settings for all BLTouch and clone probes:
+ */
 
 // Safety: The probe needs time to recognize the command.
 //         Minimum command delay (ms). Enable and increase if needed.
 //#define BLTOUCH_DELAY 500
 
 /**
-   * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
-   */
+ * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
+ */
 
 // Feature: Switch into SW mode after a deploy. It makes the output pulse longer. Can be useful
 //          in special cases, like noisy or filtered input configurations.
 //#define BLTOUCH_FORCE_SW_MODE
 
 /**
-   * Settings for BLTouch Smart 3.0 and 3.1
-   * Summary:
-   *   - Voltage modes: 5V and OD (open drain - "logic voltage free") output modes
-   *   - High-Speed mode
-   *   - Disable LCD voltage options
-   */
+ * Settings for BLTouch Smart 3.0 and 3.1
+ * Summary:
+ *   - Voltage modes: 5V and OD (open drain - "logic voltage free") output modes
+ *   - High-Speed mode
+ *   - Disable LCD voltage options
+ */
 
 /**
-   * Danger: Don't activate 5V mode unless attached to a 5V-tolerant controller!
-   * V3.0 or 3.1: Set default mode to 5V mode at Marlin startup.
-   * If disabled, OD mode is the hard-coded default on 3.0
-   * On startup, Marlin will compare its eeprom to this value. If the selected mode
-   * differs, a mode set eeprom write will be completed at initialization.
-   * Use the option below to force an eeprom write to a V3.1 probe regardless.
-   */
+ * Danger: Don't activate 5V mode unless attached to a 5V-tolerant controller!
+ * V3.0 or 3.1: Set default mode to 5V mode at Marlin startup.
+ * If disabled, OD mode is the hard-coded default on 3.0
+ * On startup, Marlin will compare its eeprom to this value. If the selected mode
+ * differs, a mode set eeprom write will be completed at initialization.
+ * Use the option below to force an eeprom write to a V3.1 probe regardless.
+ */
 //#define BLTOUCH_SET_5V_MODE
 
 /**
-   * Safety: Activate if connecting a probe with an unknown voltage mode.
-   * V3.0: Set a probe into mode selected above at Marlin startup. Required for 5V mode on 3.0
-   * V3.1: Force a probe with unknown mode into selected mode at Marlin startup ( = Probe EEPROM write )
-   * To preserve the life of the probe, use this once then turn it off and re-flash.
-   */
+ * Safety: Activate if connecting a probe with an unknown voltage mode.
+ * V3.0: Set a probe into mode selected above at Marlin startup. Required for 5V mode on 3.0
+ * V3.1: Force a probe with unknown mode into selected mode at Marlin startup ( = Probe EEPROM write )
+ * To preserve the life of the probe, use this once then turn it off and re-flash.
+ */
 //#define BLTOUCH_FORCE_MODE_SET
 
 /**
-   * Use "HIGH SPEED" mode for probing.
-   * Danger: Disable if your probe sometimes fails. Only suitable for stable well-adjusted systems.
-   * This feature was designed for Deltabots with very fast Z moves; however, higher speed Cartesians
-   * might be able to use it. If the machine can't raise Z fast enough the BLTouch may go into ALARM.
-   */
+ * Use "HIGH SPEED" mode for probing.
+ * Danger: Disable if your probe sometimes fails. Only suitable for stable well-adjusted systems.
+ * This feature was designed for Deltabots with very fast Z moves; however, higher speed Cartesians
+ * might be able to use it. If the machine can't raise Z fast enough the BLTouch may go into ALARM.
+ */
 //#define BLTOUCH_HS_MODE
 
 // Safety: Enable voltage mode settings in the LCD menu.
@@ -866,24 +866,24 @@
 //#define Z_STEPPER_ALIGN_XY { {  10, 190 }, { 100,  10 }, { 190, 190 } }
 
 /**
-   * Orientation for the automatically-calculated probe positions.
-   * Override Z stepper align points with 'M422 S<index> X<pos> Y<pos>'
-   *
-   * 2 Steppers:  (0)     (1)
-   *               |       |   2   |
-   *               | 1   2 |       |
-   *               |       |   1   |
-   *
-   * 3 Steppers:  (0)     (1)     (2)     (3)
-   *               |   3   | 1     | 2   1 |     2 |
-   *               |       |     3 |       | 3     |
-   *               | 1   2 | 2     |   3   |     1 |
-   *
-   * 4 Steppers:  (0)     (1)     (2)     (3)
-   *               | 4   3 | 1   4 | 2   1 | 3   2 |
-   *               |       |       |       |       |
-   *               | 1   2 | 2   3 | 3   4 | 4   1 |
-   */
+ * Orientation for the automatically-calculated probe positions.
+ * Override Z stepper align points with 'M422 S<index> X<pos> Y<pos>'
+ *
+ * 2 Steppers:  (0)     (1)
+ *               |       |   2   |
+ *               | 1   2 |       |
+ *               |       |   1   |
+ *
+ * 3 Steppers:  (0)     (1)     (2)     (3)
+ *               |   3   | 1     | 2   1 |     2 |
+ *               |       |     3 |       | 3     |
+ *               | 1   2 | 2     |   3   |     1 |
+ *
+ * 4 Steppers:  (0)     (1)     (2)     (3)
+ *               | 4   3 | 1   4 | 2   1 | 3   2 |
+ *               |       |       |       |       |
+ *               | 1   2 | 2   3 | 3   4 | 4   1 |
+ */
 #ifndef Z_STEPPER_ALIGN_XY
 //#define Z_STEPPERS_ORIENTATION 0
 #endif
@@ -941,11 +941,11 @@
 //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
 /**
-   * Screw thread:
-   *   M3: 30 = Clockwise, 31 = Counter-Clockwise
-   *   M4: 40 = Clockwise, 41 = Counter-Clockwise
-   *   M5: 50 = Clockwise, 51 = Counter-Clockwise
-   */
+ * Screw thread:
+ *   M3: 30 = Clockwise, 31 = Counter-Clockwise
+ *   M4: 40 = Clockwise, 41 = Counter-Clockwise
+ *   M5: 50 = Clockwise, 51 = Counter-Clockwise
+ */
 #define TRAMMING_SCREW_THREAD 30
 
 #endif
@@ -1188,15 +1188,15 @@
 //#define DIGIPOT_USE_RAW_VALUES    // Use DIGIPOT_MOTOR_CURRENT raw wiper values (instead of A4988 motor currents)
 
 /**
-   * Common slave addresses:
-   *
-   *                        A   (A shifted)   B   (B shifted)  IC
-   * Smoothie              0x2C (0x58)       0x2D (0x5A)       MCP4451
-   * AZTEEG_X3_PRO         0x2C (0x58)       0x2E (0x5C)       MCP4451
-   * AZTEEG_X5_MINI        0x2C (0x58)       0x2E (0x5C)       MCP4451
-   * AZTEEG_X5_MINI_WIFI         0x58              0x5C        MCP4451
-   * MIGHTYBOARD_REVE      0x2F (0x5E)                         MCP4018
-   */
+ * Common slave addresses:
+ *
+ *                        A   (A shifted)   B   (B shifted)  IC
+ * Smoothie              0x2C (0x58)       0x2D (0x5A)       MCP4451
+ * AZTEEG_X3_PRO         0x2C (0x58)       0x2E (0x5C)       MCP4451
+ * AZTEEG_X5_MINI        0x2C (0x58)       0x2E (0x5C)       MCP4451
+ * AZTEEG_X5_MINI_WIFI         0x58              0x5C        MCP4451
+ * MIGHTYBOARD_REVE      0x2F (0x5E)                         MCP4018
+ */
 //#define DIGIPOT_I2C_ADDRESS_A 0x2C  // Unshifted slave address for first DIGIPOT
 //#define DIGIPOT_I2C_ADDRESS_B 0x2D  // Unshifted slave address for second DIGIPOT
 #endif
@@ -1264,9 +1264,9 @@
 //#define SOUND_MENU_ITEM
 
 /**
-   * LED Control Menu
-   * Add LED Control to the LCD menu
-   */
+ * LED Control Menu
+ * Add LED Control to the LCD menu
+ */
 //#define LED_CONTROL_MENU
 #if ENABLED(LED_CONTROL_MENU)
 #define LED_COLOR_PRESETS // Enable the Preset Color menu option
@@ -1343,14 +1343,14 @@
 
 #if ENABLED(SDSUPPORT)
 /**
-   * SD Card SPI Speed
-   * May be required to resolve "volume init" errors.
-   *
-   * Enable and set to SPI_HALF_SPEED, SPI_QUARTER_SPEED, or SPI_EIGHTH_SPEED
-   *  otherwise full speed will be applied.
-   *
-   * :['SPI_HALF_SPEED', 'SPI_QUARTER_SPEED', 'SPI_EIGHTH_SPEED']
-   */
+ * SD Card SPI Speed
+ * May be required to resolve "volume init" errors.
+ *
+ * Enable and set to SPI_HALF_SPEED, SPI_QUARTER_SPEED, or SPI_EIGHTH_SPEED
+ *  otherwise full speed will be applied.
+ *
+ * :['SPI_HALF_SPEED', 'SPI_QUARTER_SPEED', 'SPI_EIGHTH_SPEED']
+ */
 //#define SD_SPI_SPEED SPI_HALF_SPEED
 
 // The standard SD detect circuit reads LOW when media is inserted and HIGH when empty.
@@ -1387,13 +1387,13 @@
 #endif
 
 /**
-   * Continue after Power-Loss (Creality3D)
-   *
-   * Store the current state to the SD Card at the start of each layer
-   * during SD printing. If the recovery file is found at boot time, present
-   * an option on the LCD screen to continue the print from the last-known
-   * point in the file.
-   */
+ * Continue after Power-Loss (Creality3D)
+ *
+ * Store the current state to the SD Card at the start of each layer
+ * during SD printing. If the recovery file is found at boot time, present
+ * an option on the LCD screen to continue the print from the last-known
+ * point in the file.
+ */
 //#define POWER_LOSS_RECOVERY
 #if ENABLED(POWER_LOSS_RECOVERY)
 #define PLR_ENABLED_DEFAULT false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
@@ -1418,28 +1418,28 @@
 #endif
 
 /**
-   * Sort SD file listings in alphabetical order.
-   *
-   * With this option enabled, items on SD cards will be sorted
-   * by name for easier navigation.
-   *
-   * By default...
-   *
-   *  - Use the slowest -but safest- method for sorting.
-   *  - Folders are sorted to the top.
-   *  - The sort key is statically allocated.
-   *  - No added G-code (M34) support.
-   *  - 40 item sorting limit. (Items after the first 40 are unsorted.)
-   *
-   * SD sorting uses static allocation (as set by SDSORT_LIMIT), allowing the
-   * compiler to calculate the worst-case usage and throw an error if the SRAM
-   * limit is exceeded.
-   *
-   *  - SDSORT_USES_RAM provides faster sorting via a static directory buffer.
-   *  - SDSORT_USES_STACK does the same, but uses a local stack-based buffer.
-   *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
-   *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
-   */
+ * Sort SD file listings in alphabetical order.
+ *
+ * With this option enabled, items on SD cards will be sorted
+ * by name for easier navigation.
+ *
+ * By default...
+ *
+ *  - Use the slowest -but safest- method for sorting.
+ *  - Folders are sorted to the top.
+ *  - The sort key is statically allocated.
+ *  - No added G-code (M34) support.
+ *  - 40 item sorting limit. (Items after the first 40 are unsorted.)
+ *
+ * SD sorting uses static allocation (as set by SDSORT_LIMIT), allowing the
+ * compiler to calculate the worst-case usage and throw an error if the SRAM
+ * limit is exceeded.
+ *
+ *  - SDSORT_USES_RAM provides faster sorting via a static directory buffer.
+ *  - SDSORT_USES_STACK does the same, but uses a local stack-based buffer.
+ *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
+ *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
+ */
 //#define SDCARD_SORT_ALPHA
 
 // SD Card Sorting options
@@ -1469,56 +1469,56 @@
 //#define SD_ABORT_NO_COOLDOWN
 
 /**
-   * This option allows you to abort SD printing when any endstop is triggered.
-   * This feature must be enabled with "M540 S1" or from the LCD menu.
-   * To have any effect, endstops must be enabled during SD printing.
-   */
+ * This option allows you to abort SD printing when any endstop is triggered.
+ * This feature must be enabled with "M540 S1" or from the LCD menu.
+ * To have any effect, endstops must be enabled during SD printing.
+ */
 //#define SD_ABORT_ON_ENDSTOP_HIT
 
 /**
-   * This option makes it easier to print the same SD Card file again.
-   * On print completion the LCD Menu will open with the file selected.
-   * You can just click to start the print, or navigate elsewhere.
-   */
+ * This option makes it easier to print the same SD Card file again.
+ * On print completion the LCD Menu will open with the file selected.
+ * You can just click to start the print, or navigate elsewhere.
+ */
 //#define SD_REPRINT_LAST_SELECTED_FILE
 
 /**
-   * Auto-report SdCard status with M27 S<seconds>
-   */
+ * Auto-report SdCard status with M27 S<seconds>
+ */
 //#define AUTO_REPORT_SD_STATUS
 
 /**
-   * Support for USB thumb drives using an Arduino USB Host Shield or
-   * equivalent MAX3421E breakout board. The USB thumb drive will appear
-   * to Marlin as an SD card.
-   *
-   * The MAX3421E can be assigned the same pins as the SD card reader, with
-   * the following pin mapping:
-   *
-   *    SCLK, MOSI, MISO --> SCLK, MOSI, MISO
-   *    INT              --> SD_DETECT_PIN [1]
-   *    SS               --> SDSS
-   *
-   * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
-   */
+ * Support for USB thumb drives using an Arduino USB Host Shield or
+ * equivalent MAX3421E breakout board. The USB thumb drive will appear
+ * to Marlin as an SD card.
+ *
+ * The MAX3421E can be assigned the same pins as the SD card reader, with
+ * the following pin mapping:
+ *
+ *    SCLK, MOSI, MISO --> SCLK, MOSI, MISO
+ *    INT              --> SD_DETECT_PIN [1]
+ *    SS               --> SDSS
+ *
+ * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
+ */
 //#define USB_FLASH_DRIVE_SUPPORT
 #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
 /**
-     * USB Host Shield Library
-     *
-     * - UHS2 uses no interrupts and has been production-tested
-     *   on a LulzBot TAZ Pro with a 32-bit Archim board.
-     *
-     * - UHS3 is newer code with better USB compatibility. But it
-     *   is less tested and is known to interfere with Servos.
-     *   [1] This requires USB_INTR_PIN to be interrupt-capable.
-     */
+ * USB Host Shield Library
+ *
+ * - UHS2 uses no interrupts and has been production-tested
+ *   on a LulzBot TAZ Pro with a 32-bit Archim board.
+ *
+ * - UHS3 is newer code with better USB compatibility. But it
+ *   is less tested and is known to interfere with Servos.
+ *   [1] This requires USB_INTR_PIN to be interrupt-capable.
+ */
 //#define USE_UHS2_USB
 //#define USE_UHS3_USB
 
 /**
-     * Native USB Host supported by some boards (USB OTG)
-     */
+ * Native USB Host supported by some boards (USB OTG)
+ */
 //#define USE_OTG_USB_HOST
 
 #if DISABLED(USE_OTG_USB_HOST)
@@ -1528,14 +1528,14 @@
 #endif
 
 /**
-   * When using a bootloader that supports SD-Firmware-Flashing,
-   * add a menu item to activate SD-FW-Update on the next reboot.
-   *
-   * Requires ATMEGA2560 (Arduino Mega)
-   *
-   * Tested with this bootloader:
-   *   https://github.com/FleetProbe/MicroBridge-Arduino-ATMega2560
-   */
+ * When using a bootloader that supports SD-Firmware-Flashing,
+ * add a menu item to activate SD-FW-Update on the next reboot.
+ *
+ * Requires ATMEGA2560 (Arduino Mega)
+ *
+ * Tested with this bootloader:
+ *   https://github.com/FleetProbe/MicroBridge-Arduino-ATMega2560
+ */
 //#define SD_FIRMWARE_UPDATE
 #if ENABLED(SD_FIRMWARE_UPDATE)
 #define SD_FIRMWARE_UPDATE_EEPROM_ADDR 0x1FF
@@ -1547,14 +1547,14 @@
 //#define BINARY_FILE_TRANSFER
 
 /**
-   * Set this option to one of the following (or the board's defaults apply):
-   *
-   *           LCD - Use the SD drive in the external LCD controller.
-   *       ONBOARD - Use the SD drive on the control board.
-   *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
-   *
-   * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
-   */
+ * Set this option to one of the following (or the board's defaults apply):
+ *
+ *           LCD - Use the SD drive in the external LCD controller.
+ *       ONBOARD - Use the SD drive on the control board.
+ *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
+ *
+ * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
+ */
 //#define SDCARD_CONNECTION LCD
 
 // Enable if SD detect is rendered useless (e.g., by using an SD extender)
@@ -1612,17 +1612,17 @@
 //#define OVERLAY_GFX_REVERSE
 
 /**
-   * ST7920-based LCDs can emulate a 16 x 4 character display using
-   * the ST7920 character-generator for very fast screen updates.
-   * Enable LIGHTWEIGHT_UI to use this special display mode.
-   *
-   * Since LIGHTWEIGHT_UI has limited space, the position and status
-   * message occupy the same line. Set STATUS_EXPIRE_SECONDS to the
-   * length of time to display the status message before clearing.
-   *
-   * Set STATUS_EXPIRE_SECONDS to zero to never clear the status.
-   * This will prevent position updates from being displayed.
-   */
+ * ST7920-based LCDs can emulate a 16 x 4 character display using
+ * the ST7920 character-generator for very fast screen updates.
+ * Enable LIGHTWEIGHT_UI to use this special display mode.
+ *
+ * Since LIGHTWEIGHT_UI has limited space, the position and status
+ * message occupy the same line. Set STATUS_EXPIRE_SECONDS to the
+ * length of time to display the status message before clearing.
+ *
+ * Set STATUS_EXPIRE_SECONDS to zero to never clear the status.
+ * This will prevent position updates from being displayed.
+ */
 #if ENABLED(U8GLIB_ST7920)
 // Enable this option and reduce the value to optimize screen updates.
 // The normal delay is 10µs. Use the lowest value that still gives a reliable display.
@@ -1635,10 +1635,10 @@
 #endif
 
 /**
-   * Status (Info) Screen customizations
-   * These options may affect code size and screen render time.
-   * Custom status screens can forcibly override these settings.
-   */
+ * Status (Info) Screen customizations
+ * These options may affect code size and screen render time.
+ * Custom status screens can forcibly override these settings.
+ */
 //#define STATUS_COMBINE_HEATERS    // Use combined heater images instead of separate ones
 //#define STATUS_HOTEND_NUMBERLESS  // Use plain hotend icons instead of numbered ones (with 2+ hotends)
 #define STATUS_HOTEND_INVERTED // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
@@ -1712,15 +1712,15 @@
 //#define AC_DEFAULT_STARTUP_TUNE
 
 /**
-   * Display Folders
-   * By default the file browser lists all G-code files (including those in subfolders) in a flat list.
-   * Enable this option to display a hierarchical file browser.
-   *
-   * NOTES:
-   * - Without this option it helps to enable SDCARD_SORT_ALPHA so files are sorted before/after folders.
-   * - When used with the "new" panel, folder names will also have '.gcode' appended to their names.
-   *   This hack is currently required to force the panel to show folders.
-   */
+ * Display Folders
+ * By default the file browser lists all G-code files (including those in subfolders) in a flat list.
+ * Enable this option to display a hierarchical file browser.
+ *
+ * NOTES:
+ * - Without this option it helps to enable SDCARD_SORT_ALPHA so files are sorted before/after folders.
+ * - When used with the "new" panel, folder names will also have '.gcode' appended to their names.
+ *   This hack is currently required to force the panel to show folders.
+ */
 #define AC_SD_FOLDER_VIEW
 #endif
 
@@ -1916,7 +1916,7 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
 //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
 #define LIN_ADVANCE_K 0.22 // Unit: mm compression per 1mm/s extruder speed
@@ -1986,9 +1986,9 @@
 #define G29_MAX_RETRIES 3
 #define G29_HALT_ON_FAILURE
 /**
-   * Specify the GCODE commands that will be executed when leveling succeeds,
-   * between attempts, and after the maximum number of retries have been tried.
-   */
+ * Specify the GCODE commands that will be executed when leveling succeeds,
+ * between attempts, and after the maximum number of retries have been tried.
+ */
 #define G29_SUCCESS_COMMANDS "M117 Bed leveling done."
 #define G29_RECOVER_COMMANDS "M117 Probe failed. Rewiping.\nG28\nG12 P0 S12 T0"
 #define G29_FAILURE_COMMANDS "M117 Bed leveling failed.\nG0 Z10\nM300 P25 S880\nM300 P50 S0\nM300 P25 S880\nM300 P50 S0\nM300 P25 S880\nM300 P50 S0\nG4 S1"
@@ -2320,22 +2320,22 @@
 #endif
 
 /**
-   * Extra G-code to run while executing tool-change commands. Can be used to use an additional
-   * stepper motor (I axis, see option LINEAR_AXES in Configuration.h) to drive the tool-changer.
-   */
+ * Extra G-code to run while executing tool-change commands. Can be used to use an additional
+ * stepper motor (I axis, see option LINEAR_AXES in Configuration.h) to drive the tool-changer.
+ */
 //#define EVENT_GCODE_TOOLCHANGE_T0 "G28 A\nG1 A0" // Extra G-code to run while executing tool-change command T0
 //#define EVENT_GCODE_TOOLCHANGE_T1 "G1 A10"       // Extra G-code to run while executing tool-change command T1
 
 /**
-   * Tool Sensors detect when tools have been picked up or dropped.
-   * Requires the pins TOOL_SENSOR1_PIN, TOOL_SENSOR2_PIN, etc.
-   */
+ * Tool Sensors detect when tools have been picked up or dropped.
+ * Requires the pins TOOL_SENSOR1_PIN, TOOL_SENSOR2_PIN, etc.
+ */
 //#define TOOL_SENSOR
 
 /**
-   * Retract and prime filament on tool-change to reduce
-   * ooze and stringing and to get cleaner transitions.
-   */
+ * Retract and prime filament on tool-change to reduce
+ * ooze and stringing and to get cleaner transitions.
+ */
 //#define TOOLCHANGE_FILAMENT_SWAP
 #if ENABLED(TOOLCHANGE_FILAMENT_SWAP)
 // Load / Unload
@@ -2363,23 +2363,23 @@
 //#define TOOLCHANGE_FS_PRIME_FIRST_USED
 
 /**
-     * Tool Change Migration
-     * This feature provides G-code and LCD options to switch tools mid-print.
-     * All applicable tool properties are migrated so the print can continue.
-     * Tools must be closely matching and other restrictions may apply.
-     * Useful to:
-     *   - Change filament color without interruption
-     *   - Switch spools automatically on filament runout
-     *   - Switch to a different nozzle on an extruder jam
-     */
+ * Tool Change Migration
+ * This feature provides G-code and LCD options to switch tools mid-print.
+ * All applicable tool properties are migrated so the print can continue.
+ * Tools must be closely matching and other restrictions may apply.
+ * Useful to:
+ *   - Change filament color without interruption
+ *   - Switch spools automatically on filament runout
+ *   - Switch to a different nozzle on an extruder jam
+ */
 #define TOOLCHANGE_MIGRATION_FEATURE
 
 #endif
 
 /**
-   * Position to park head during tool change.
-   * Doesn't apply to SWITCHING_TOOLHEAD, DUAL_X_CARRIAGE, or PARKING_EXTRUDER
-   */
+ * Position to park head during tool change.
+ * Doesn't apply to SWITCHING_TOOLHEAD, DUAL_X_CARRIAGE, or PARKING_EXTRUDER
+ */
 //#define TOOLCHANGE_PARK
 #if ENABLED(TOOLCHANGE_PARK)
 #define TOOLCHANGE_PARK_XY           \
@@ -2597,9 +2597,9 @@
 #define HOLD_MULTIPLIER 0.5 // Scales down the holding current from run current
 
 /**
-   * Interpolate microsteps to 256
-   * Override for each driver with <driver>_INTERPOLATE settings below
-   */
+ * Interpolate microsteps to 256
+ * Override for each driver with <driver>_INTERPOLATE settings below
+ */
 #define INTERPOLATE true
 
 #if AXIS_IS_TMC(X)
@@ -2766,9 +2766,9 @@
 #endif
 
 /**
-   * Override default SPI pins for TMC2130, TMC2160, TMC2660, TMC5130 and TMC5160 drivers here.
-   * The default pins can be found in your board's pins file.
-   */
+ * Override default SPI pins for TMC2130, TMC2160, TMC2660, TMC5130 and TMC5160 drivers here.
+ * The default pins can be found in your board's pins file.
+ */
 //#define X_CS_PIN          -1
 //#define Y_CS_PIN          -1
 //#define Z_CS_PIN          -1
@@ -2790,27 +2790,27 @@
 //#define E7_CS_PIN         -1
 
 /**
-   * Software option for SPI driven drivers (TMC2130, TMC2160, TMC2660, TMC5130 and TMC5160).
-   * The default SW SPI pins are defined the respective pins files,
-   * but you can override or define them here.
-   */
+ * Software option for SPI driven drivers (TMC2130, TMC2160, TMC2660, TMC5130 and TMC5160).
+ * The default SW SPI pins are defined the respective pins files,
+ * but you can override or define them here.
+ */
 //#define TMC_USE_SW_SPI
 //#define TMC_SW_MOSI       -1
 //#define TMC_SW_MISO       -1
 //#define TMC_SW_SCK        -1
 
 /**
-   * Four TMC2209 drivers can use the same HW/SW serial port with hardware configured addresses.
-   * Set the address using jumpers on pins MS1 and MS2.
-   * Address | MS1  | MS2
-   *       0 | LOW  | LOW
-   *       1 | HIGH | LOW
-   *       2 | LOW  | HIGH
-   *       3 | HIGH | HIGH
-   *
-   * Set *_SERIAL_TX_PIN and *_SERIAL_RX_PIN to match for all drivers
-   * on the same serial port, either here or in your board's pins file.
-   */
+ * Four TMC2209 drivers can use the same HW/SW serial port with hardware configured addresses.
+ * Set the address using jumpers on pins MS1 and MS2.
+ * Address | MS1  | MS2
+ *       0 | LOW  | LOW
+ *       1 | HIGH | LOW
+ *       2 | LOW  | HIGH
+ *       3 | HIGH | HIGH
+ *
+ * Set *_SERIAL_TX_PIN and *_SERIAL_RX_PIN to match for all drivers
+ * on the same serial port, either here or in your board's pins file.
+ */
 //#define  X_SLAVE_ADDRESS 0
 //#define  Y_SLAVE_ADDRESS 0
 //#define  Z_SLAVE_ADDRESS 0
@@ -2832,18 +2832,18 @@
 //#define E7_SLAVE_ADDRESS 0
 
 /**
-   * Software enable
-   *
-   * Use for drivers that do not use a dedicated enable pin, but rather handle the same
-   * function through a communication line such as SPI or UART.
-   */
+ * Software enable
+ *
+ * Use for drivers that do not use a dedicated enable pin, but rather handle the same
+ * function through a communication line such as SPI or UART.
+ */
 //#define SOFTWARE_DRIVER_ENABLE
 
 /**
-   * TMC2130, TMC2160, TMC2208, TMC2209, TMC5130 and TMC5160 only
-   * Use Trinamic's ultra quiet stepping mode.
-   * When disabled, Marlin will use spreadCycle stepping mode.
-   */
+ * TMC2130, TMC2160, TMC2208, TMC2209, TMC5130 and TMC5160 only
+ * Use Trinamic's ultra quiet stepping mode.
+ * When disabled, Marlin will use spreadCycle stepping mode.
+ */
 #define STEALTHCHOP_XY
 #define STEALTHCHOP_Z
 #define STEALTHCHOP_I
@@ -2852,20 +2852,20 @@
 #define STEALTHCHOP_E
 
 /**
-   * Optimize spreadCycle chopper parameters by using predefined parameter sets
-   * or with the help of an example included in the library.
-   * Provided parameter sets are
-   * CHOPPER_DEFAULT_12V
-   * CHOPPER_DEFAULT_19V
-   * CHOPPER_DEFAULT_24V
-   * CHOPPER_DEFAULT_36V
-   * CHOPPER_09STEP_24V   // 0.9 degree steppers (24V)
-   * CHOPPER_PRUSAMK3_24V // Imported parameters from the official Průša firmware for MK3 (24V)
-   * CHOPPER_MARLIN_119   // Old defaults from Marlin v1.1.9
-   *
-   * Define your own with:
-   * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
-   */
+ * Optimize spreadCycle chopper parameters by using predefined parameter sets
+ * or with the help of an example included in the library.
+ * Provided parameter sets are
+ * CHOPPER_DEFAULT_12V
+ * CHOPPER_DEFAULT_19V
+ * CHOPPER_DEFAULT_24V
+ * CHOPPER_DEFAULT_36V
+ * CHOPPER_09STEP_24V   // 0.9 degree steppers (24V)
+ * CHOPPER_PRUSAMK3_24V // Imported parameters from the official Průša firmware for MK3 (24V)
+ * CHOPPER_MARLIN_119   // Old defaults from Marlin v1.1.9
+ *
+ * Define your own with:
+ * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
+ */
 #define CHOPPER_TIMING CHOPPER_DEFAULT_12V // All axes (override below)
 //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
 //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
@@ -2885,16 +2885,16 @@
 //#define CHOPPER_TIMING_E7 CHOPPER_TIMING_E
 
 /**
-   * Monitor Trinamic drivers
-   * for error conditions like overtemperature and short to ground.
-   * To manage over-temp Marlin can decrease the driver current until the error condition clears.
-   * Other detected conditions can be used to stop the current print.
-   * Relevant G-codes:
-   * M906 - Set or get motor current in milliamps using axis codes X, Y, Z, E. Report values if no axis codes given.
-   * M911 - Report stepper driver overtemperature pre-warn condition.
-   * M912 - Clear stepper driver overtemperature pre-warn condition flag.
-   * M122 - Report driver parameters (Requires TMC_DEBUG)
-   */
+ * Monitor Trinamic drivers
+ * for error conditions like overtemperature and short to ground.
+ * To manage over-temp Marlin can decrease the driver current until the error condition clears.
+ * Other detected conditions can be used to stop the current print.
+ * Relevant G-codes:
+ * M906 - Set or get motor current in milliamps using axis codes X, Y, Z, E. Report values if no axis codes given.
+ * M911 - Report stepper driver overtemperature pre-warn condition.
+ * M912 - Clear stepper driver overtemperature pre-warn condition flag.
+ * M122 - Report driver parameters (Requires TMC_DEBUG)
+ */
 //#define MONITOR_DRIVER_STATUS
 
 #if ENABLED(MONITOR_DRIVER_STATUS)
@@ -2904,12 +2904,12 @@
 #endif
 
 /**
-   * TMC2130, TMC2160, TMC2208, TMC2209, TMC5130 and TMC5160 only
-   * The driver will switch to spreadCycle when stepper speed is over HYBRID_THRESHOLD.
-   * This mode allows for faster movements at the expense of higher noise levels.
-   * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
-   * M913 X/Y/Z/E to live tune the setting
-   */
+ * TMC2130, TMC2160, TMC2208, TMC2209, TMC5130 and TMC5160 only
+ * The driver will switch to spreadCycle when stepper speed is over HYBRID_THRESHOLD.
+ * This mode allows for faster movements at the expense of higher noise levels.
+ * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
+ * M913 X/Y/Z/E to live tune the setting
+ */
 //#define HYBRID_THRESHOLD
 
 #define X_HYBRID_THRESHOLD 100 // [mm/s]
@@ -2933,30 +2933,30 @@
 #define E7_HYBRID_THRESHOLD 30
 
 /**
-   * Use StallGuard to home / probe X, Y, Z.
-   *
-   * TMC2130, TMC2160, TMC2209, TMC2660, TMC5130, and TMC5160 only
-   * Connect the stepper driver's DIAG1 pin to the X/Y endstop pin.
-   * X, Y, and Z homing will always be done in spreadCycle mode.
-   *
-   * X/Y/Z_STALL_SENSITIVITY is the default stall threshold.
-   * Use M914 X Y Z to set the stall threshold at runtime:
-   *
-   *  Sensitivity   TMC2209   Others
-   *    HIGHEST       255      -64    (Too sensitive => False positive)
-   *    LOWEST         0        63    (Too insensitive => No trigger)
-   *
-   * It is recommended to set HOMING_BUMP_MM to { 0, 0, 0 }.
-   *
-   * SPI_ENDSTOPS  *** Beta feature! *** TMC2130/TMC5160 Only ***
-   * Poll the driver through SPI to determine load when homing.
-   * Removes the need for a wire from DIAG1 to an endstop pin.
-   *
-   * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
-   * homing and adds a guard period for endstop triggering.
-   *
-   * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
-   */
+ * Use StallGuard to home / probe X, Y, Z.
+ *
+ * TMC2130, TMC2160, TMC2209, TMC2660, TMC5130, and TMC5160 only
+ * Connect the stepper driver's DIAG1 pin to the X/Y endstop pin.
+ * X, Y, and Z homing will always be done in spreadCycle mode.
+ *
+ * X/Y/Z_STALL_SENSITIVITY is the default stall threshold.
+ * Use M914 X Y Z to set the stall threshold at runtime:
+ *
+ *  Sensitivity   TMC2209   Others
+ *    HIGHEST       255      -64    (Too sensitive => False positive)
+ *    LOWEST         0        63    (Too insensitive => No trigger)
+ *
+ * It is recommended to set HOMING_BUMP_MM to { 0, 0, 0 }.
+ *
+ * SPI_ENDSTOPS  *** Beta feature! *** TMC2130/TMC5160 Only ***
+ * Poll the driver through SPI to determine load when homing.
+ * Removes the need for a wire from DIAG1 to an endstop pin.
+ *
+ * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
+ * homing and adds a guard period for endstop triggering.
+ *
+ * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
+ */
 //#define SENSORLESS_HOMING // StallGuard capable drivers only
 
 #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
@@ -2977,40 +2977,40 @@
 #endif
 
 /**
-   * TMC Homing stepper phase.
-   *
-   * Improve homing repeatability by homing to stepper coil's nearest absolute
-   * phase position. Trinamic drivers use a stepper phase table with 1024 values
-   * spanning 4 full steps with 256 positions each (ergo, 1024 positions).
-   * Full step positions (128, 384, 640, 896) have the highest holding torque.
-   *
-   * Values from 0..1023, -1 to disable homing phase for that axis.
-   */
+ * TMC Homing stepper phase.
+ *
+ * Improve homing repeatability by homing to stepper coil's nearest absolute
+ * phase position. Trinamic drivers use a stepper phase table with 1024 values
+ * spanning 4 full steps with 256 positions each (ergo, 1024 positions).
+ * Full step positions (128, 384, 640, 896) have the highest holding torque.
+ *
+ * Values from 0..1023, -1 to disable homing phase for that axis.
+ */
 //#define TMC_HOME_PHASE { 896, 896, 896 }
 
 /**
-   * Beta feature!
-   * Create a 50/50 square wave step pulse optimal for stepper drivers.
-   */
+ * Beta feature!
+ * Create a 50/50 square wave step pulse optimal for stepper drivers.
+ */
 //#define SQUARE_WAVE_STEPPING
 
 /**
-   * Enable M122 debugging command for TMC stepper drivers.
-   * M122 S0/1 will enable continuous reporting.
-   */
+ * Enable M122 debugging command for TMC stepper drivers.
+ * M122 S0/1 will enable continuous reporting.
+ */
 //#define TMC_DEBUG
 
 /**
-   * You can set your own advanced settings by filling in predefined functions.
-   * A list of available functions can be found on the library github page
-   * https://github.com/teemuatlut/TMCStepper
-   *
-   * Example:
-   * #define TMC_ADV() { \
-   *   stepperX.diag0_otpw(1); \
-   *   stepperY.intpol(0); \
-   * }
-   */
+ * You can set your own advanced settings by filling in predefined functions.
+ * A list of available functions can be found on the library github page
+ * https://github.com/teemuatlut/TMCStepper
+ *
+ * Example:
+ * #define TMC_ADV() { \
+ *   stepperX.diag0_otpw(1); \
+ *   stepperY.intpol(0); \
+ * }
+ */
 #define TMC_ADV() \
    {              \
    }
@@ -3214,21 +3214,21 @@
 #endif
 
 /**
-   * Monitor L6470 drivers for error conditions like over temperature and over current.
-   * In the case of over temperature Marlin can decrease the drive until the error condition clears.
-   * Other detected conditions can be used to stop the current print.
-   * Relevant G-codes:
-   * M906 - I1/2/3/4/5  Set or get motor drive level using axis codes X, Y, Z, E. Report values if no axis codes given.
-   *         I not present or I0 or I1 - X, Y, Z or E0
-   *         I2 - X2, Y2, Z2 or E1
-   *         I3 - Z3 or E3
-   *         I4 - Z4 or E4
-   *         I5 - E5
-   * M916 - Increase drive level until get thermal warning
-   * M917 - Find minimum current thresholds
-   * M918 - Increase speed until max or error
-   * M122 S0/1 - Report driver parameters
-   */
+ * Monitor L6470 drivers for error conditions like over temperature and over current.
+ * In the case of over temperature Marlin can decrease the drive until the error condition clears.
+ * Other detected conditions can be used to stop the current print.
+ * Relevant G-codes:
+ * M906 - I1/2/3/4/5  Set or get motor drive level using axis codes X, Y, Z, E. Report values if no axis codes given.
+ *         I not present or I0 or I1 - X, Y, Z or E0
+ *         I2 - X2, Y2, Z2 or E1
+ *         I3 - Z3 or E3
+ *         I4 - Z4 or E4
+ *         I5 - E5
+ * M916 - Increase drive level until get thermal warning
+ * M917 - Find minimum current thresholds
+ * M918 - Increase speed until max or error
+ * M122 S0/1 - Report driver parameters
+ */
 //#define MONITOR_L6470_DRIVER_STATUS
 
 #if ENABLED(MONITOR_L6470_DRIVER_STATUS)
@@ -3308,14 +3308,14 @@
 //#define PHOTO_SWITCH_MS   50 // (ms) (M240 D)
 
 /**
-   * PHOTO_PULSES_US may need adjustment depending on board and camera model.
-   * Pin must be running at 48.4kHz.
-   * Be sure to use a PHOTOGRAPH_PIN which can rise and fall quick enough.
-   * (e.g., MKS SBase temp sensor pin was too slow, so used P1.23 on J8.)
-   *
-   *  Example pulse data for Nikon: https://bit.ly/2FKD0Aq
-   *                     IR Wiring: https://git.io/JvJf7
-   */
+ * PHOTO_PULSES_US may need adjustment depending on board and camera model.
+ * Pin must be running at 48.4kHz.
+ * Be sure to use a PHOTOGRAPH_PIN which can rise and fall quick enough.
+ * (e.g., MKS SBase temp sensor pin was too slow, so used P1.23 on J8.)
+ *
+ *  Example pulse data for Nikon: https://bit.ly/2FKD0Aq
+ *                     IR Wiring: https://git.io/JvJf7
+ */
 //#define PHOTO_PULSES_US { 2000, 27850, 400, 1580, 400, 3580, 400 }  // (µs) Durations for each 48.4kHz oscillation
 #ifdef PHOTO_PULSES_US
 #define PHOTO_PULSE_DELAY_US 13 // (µs) Approximate duration of each HIGH and LOW pulse in the oscillation
@@ -3365,22 +3365,22 @@
 #endif
 
 /**
-   * Speed / Power can be set ('M3 S') and displayed in terms of:
-   *  - PWM255  (S0 - S255)
-   *  - PERCENT (S0 - S100)
-   *  - RPM     (S0 - S50000)  Best for use with a spindle
-   *  - SERVO   (S0 - S180)
-   */
+ * Speed / Power can be set ('M3 S') and displayed in terms of:
+ *  - PWM255  (S0 - S255)
+ *  - PERCENT (S0 - S100)
+ *  - RPM     (S0 - S50000)  Best for use with a spindle
+ *  - SERVO   (S0 - S180)
+ */
 #define CUTTER_POWER_UNIT PWM255
 
 /**
-   * Relative Cutter Power
-   * Normally, 'M3 O<power>' sets
-   * OCR power is relative to the range SPEED_POWER_MIN...SPEED_POWER_MAX.
-   * so input powers of 0...255 correspond to SPEED_POWER_MIN...SPEED_POWER_MAX
-   * instead of normal range (0 to SPEED_POWER_MAX).
-   * Best used with (e.g.) SuperPID router controller: S0 = 5,000 RPM and S255 = 30,000 RPM
-   */
+ * Relative Cutter Power
+ * Normally, 'M3 O<power>' sets
+ * OCR power is relative to the range SPEED_POWER_MIN...SPEED_POWER_MAX.
+ * so input powers of 0...255 correspond to SPEED_POWER_MIN...SPEED_POWER_MAX
+ * instead of normal range (0 to SPEED_POWER_MAX).
+ * Best used with (e.g.) SuperPID router controller: S0 = 5,000 RPM and S255 = 30,000 RPM
+ */
 //#define CUTTER_POWER_RELATIVE              // Set speed proportional to [SPEED_POWER_MIN...SPEED_POWER_MAX]
 
 #if ENABLED(SPINDLE_FEATURE)
@@ -3392,14 +3392,14 @@
 #define SPINDLE_LASER_POWERDOWN_DELAY 5000 // (ms) Delay to allow the spindle to stop
 
 /**
-     * M3/M4 Power Equation
-     *
-     * Each tool uses different value ranges for speed / power control.
-     * These parameters are used to convert between tool power units and PWM.
-     *
-     * Speed/Power = (PWMDC / 255 * 100 - SPEED_POWER_INTERCEPT) / SPEED_POWER_SLOPE
-     * PWMDC = (spdpwr - SPEED_POWER_MIN) / (SPEED_POWER_MAX - SPEED_POWER_MIN) / SPEED_POWER_SLOPE
-     */
+ * M3/M4 Power Equation
+ *
+ * Each tool uses different value ranges for speed / power control.
+ * These parameters are used to convert between tool power units and PWM.
+ *
+ * Speed/Power = (PWMDC / 255 * 100 - SPEED_POWER_INTERCEPT) / SPEED_POWER_SLOPE
+ * PWMDC = (spdpwr - SPEED_POWER_MIN) / (SPEED_POWER_MAX - SPEED_POWER_MIN) / SPEED_POWER_SLOPE
+ */
 #define SPEED_POWER_INTERCEPT 0   // (%) 0-100 i.e., Minimum power percentage
 #define SPEED_POWER_MIN 5000      // (RPM)
 #define SPEED_POWER_MAX 30000     // (RPM) SuperPID router controller 0 - 30,000 RPM
@@ -3417,46 +3417,46 @@
 #define LASER_TEST_PULSE_MAX 999 // Caution: Menu may not show more than 3 characters
 
 /**
-     * Enable inline laser power to be handled in the planner / stepper routines.
-     * Inline power is specified by the I (inline) flag in an M3 command (e.g., M3 S20 I)
-     * or by the 'S' parameter in G0/G1/G2/G3 moves (see LASER_MOVE_POWER).
-     *
-     * This allows the laser to keep in perfect sync with the planner and removes
-     * the powerup/down delay since lasers require negligible time.
-     */
+ * Enable inline laser power to be handled in the planner / stepper routines.
+ * Inline power is specified by the I (inline) flag in an M3 command (e.g., M3 S20 I)
+ * or by the 'S' parameter in G0/G1/G2/G3 moves (see LASER_MOVE_POWER).
+ *
+ * This allows the laser to keep in perfect sync with the planner and removes
+ * the powerup/down delay since lasers require negligible time.
+ */
 //#define LASER_POWER_INLINE
 
 #if ENABLED(LASER_POWER_INLINE)
 /**
-       * Scale the laser's power in proportion to the movement rate.
-       *
-       * - Sets the entry power proportional to the entry speed over the nominal speed.
-       * - Ramps the power up every N steps to approximate the speed trapezoid.
-       * - Due to the limited power resolution this is only approximate.
-       */
+ * Scale the laser's power in proportion to the movement rate.
+ *
+ * - Sets the entry power proportional to the entry speed over the nominal speed.
+ * - Ramps the power up every N steps to approximate the speed trapezoid.
+ * - Due to the limited power resolution this is only approximate.
+ */
 #define LASER_POWER_INLINE_TRAPEZOID
 
 /**
-       * Continuously calculate the current power (nominal_power * current_rate / nominal_rate).
-       * Required for accurate power with non-trapezoidal acceleration (e.g., S_CURVE_ACCELERATION).
-       * This is a costly calculation so this option is discouraged on 8-bit AVR boards.
-       *
-       * LASER_POWER_INLINE_TRAPEZOID_CONT_PER defines how many step cycles there are between power updates. If your
-       * board isn't able to generate steps fast enough (and you are using LASER_POWER_INLINE_TRAPEZOID_CONT), increase this.
-       * Note that when this is zero it means it occurs every cycle; 1 means a delay wait one cycle then run, etc.
-       */
+ * Continuously calculate the current power (nominal_power * current_rate / nominal_rate).
+ * Required for accurate power with non-trapezoidal acceleration (e.g., S_CURVE_ACCELERATION).
+ * This is a costly calculation so this option is discouraged on 8-bit AVR boards.
+ *
+ * LASER_POWER_INLINE_TRAPEZOID_CONT_PER defines how many step cycles there are between power updates. If your
+ * board isn't able to generate steps fast enough (and you are using LASER_POWER_INLINE_TRAPEZOID_CONT), increase this.
+ * Note that when this is zero it means it occurs every cycle; 1 means a delay wait one cycle then run, etc.
+ */
 //#define LASER_POWER_INLINE_TRAPEZOID_CONT
 
 /**
-       * Stepper iterations between power updates. Increase this value if the board
-       * can't keep up with the processing demands of LASER_POWER_INLINE_TRAPEZOID_CONT.
-       * Disable (or set to 0) to recalculate power on every stepper iteration.
-       */
+ * Stepper iterations between power updates. Increase this value if the board
+ * can't keep up with the processing demands of LASER_POWER_INLINE_TRAPEZOID_CONT.
+ * Disable (or set to 0) to recalculate power on every stepper iteration.
+ */
 //#define LASER_POWER_INLINE_TRAPEZOID_CONT_PER 10
 
 /**
-       * Include laser power in G0/G1/G2/G3/G5 commands with the 'S' parameter
-       */
+ * Include laser power in G0/G1/G2/G3/G5 commands with the 'S' parameter
+ */
 //#define LASER_MOVE_POWER
 
 #if ENABLED(LASER_MOVE_POWER)
@@ -3469,19 +3469,19 @@
 #endif
 
 /**
-       * Inline flag inverted
-       *
-       * WARNING: M5 will NOT turn off the laser unless another move
-       *          is done (so G-code files must end with 'M5 I').
-       */
+ * Inline flag inverted
+ *
+ * WARNING: M5 will NOT turn off the laser unless another move
+ *          is done (so G-code files must end with 'M5 I').
+ */
 //#define LASER_POWER_INLINE_INVERT
 
 /**
-       * Continuously apply inline power. ('M3 S3' == 'G1 S3' == 'M3 S3 I')
-       *
-       * The laser might do some weird things, so only enable this
-       * feature if you understand the implications.
-       */
+ * Continuously apply inline power. ('M3 S3' == 'G1 S3' == 'M3 S3 I')
+ *
+ * The laser might do some weird things, so only enable this
+ * feature if you understand the implications.
+ */
 //#define LASER_POWER_INLINE_CONTINUOUS
 
 #else
@@ -3635,23 +3635,23 @@
 
 #if DISABLED(NO_VOLUMETRICS)
 /**
-   * Volumetric extrusion default state
-   * Activate to make volumetric extrusion the default method,
-   * with DEFAULT_NOMINAL_FILAMENT_DIA as the default diameter.
-   *
-   * M200 D0 to disable, M200 Dn to set a new diameter (and enable volumetric).
-   * M200 S0/S1 to disable/enable volumetric extrusion.
-   */
+ * Volumetric extrusion default state
+ * Activate to make volumetric extrusion the default method,
+ * with DEFAULT_NOMINAL_FILAMENT_DIA as the default diameter.
+ *
+ * M200 D0 to disable, M200 Dn to set a new diameter (and enable volumetric).
+ * M200 S0/S1 to disable/enable volumetric extrusion.
+ */
 //#define VOLUMETRIC_DEFAULT_ON
 
 //#define VOLUMETRIC_EXTRUDER_LIMIT
 #if ENABLED(VOLUMETRIC_EXTRUDER_LIMIT)
 /**
-     * Default volumetric extrusion limit in cubic mm per second (mm^3/sec).
-     * This factory setting applies to all extruders.
-     * Use 'M200 [T<extruder>] L<limit>' to override and 'M502' to reset.
-     * A non-zero value activates Volume-based Extrusion Limiting.
-     */
+ * Default volumetric extrusion limit in cubic mm per second (mm^3/sec).
+ * This factory setting applies to all extruders.
+ * Use 'M200 [T<extruder>] L<limit>' to override and 'M502' to reset.
+ * A non-zero value activates Volume-based Extrusion Limiting.
+ */
 #define DEFAULT_VOLUMETRIC_EXTRUDER_LIMIT 0.00 // (mm^3/sec)
 #endif
 #endif
@@ -3927,10 +3927,10 @@
                                  // is trusted again.
 
 /**
-   * Position is checked every time a new command is executed from the buffer but during long moves,
-   * this setting determines the minimum update time between checks. A value of 100 works well with
-   * error rolling average when attempting to correct only for skips and not for vibration.
-   */
+ * Position is checked every time a new command is executed from the buffer but during long moves,
+ * this setting determines the minimum update time between checks. A value of 100 works well with
+ * error rolling average when attempting to correct only for skips and not for vibration.
+ */
 #define I2CPE_MIN_UPD_TIME_MS 4 // (ms) Minimum time between encoder checks.
 
 // Use a rolling average to identify persistant errors that indicate skips, as opposed to vibration and noise.
@@ -4018,9 +4018,9 @@
 //#define MAX7219_SIDE_BY_SIDE   // Big chip+matrix boards can be chained side-by-side
 
 /**
-   * Sample debug features
-   * If you add more debug displays, be careful to avoid conflicts!
-   */
+ * Sample debug features
+ * If you add more debug displays, be careful to avoid conflicts!
+ */
 #define MAX7219_DEBUG_PRINTER_ALIVE  // Blink corner LED of 8x8 matrix to show that the firmware is functioning
 #define MAX7219_DEBUG_PLANNER_HEAD 3 // Show the planner queue head position on this and the next LED matrix row
 #define MAX7219_DEBUG_PLANNER_TAIL 5 // Show the planner queue tail position on this and the next LED matrix row
@@ -4064,13 +4064,13 @@
 //#define WIFI_CUSTOM_COMMAND // Accept feature config commands (e.g., WiFi ESP3D) from the host
 
 /**
-   * To set a default WiFi SSID / Password, create a file called Configuration_Secure.h with
-   * the following defines, customized for your network. This specific file is excluded via
-   * .gitignore to prevent it from accidentally leaking to the public.
-   *
-   *   #define WIFI_SSID "WiFi SSID"
-   *   #define WIFI_PWD  "WiFi Password"
-   */
+ * To set a default WiFi SSID / Password, create a file called Configuration_Secure.h with
+ * the following defines, customized for your network. This specific file is excluded via
+ * .gitignore to prevent it from accidentally leaking to the public.
+ *
+ *   #define WIFI_SSID "WiFi SSID"
+ *   #define WIFI_PWD  "WiFi Password"
+ */
 //#include "Configuration_Secure.h" // External file with WiFi SSID / Password
 #endif
 
@@ -4083,12 +4083,12 @@
  */
 #if HAS_PRUSA_MMU1
 /**
-   * This option only allows the multiplexer to switch on tool-change.
-   * Additional options to configure custom E moves are pending.
-   *
-   * Override the default DIO selector pins here, if needed.
-   * Some pins files may provide defaults for these pins.
-   */
+ * This option only allows the multiplexer to switch on tool-change.
+ * Additional options to configure custom E moves are pending.
+ *
+ * Override the default DIO selector pins here, if needed.
+ * Some pins files may provide defaults for these pins.
+ */
 //#define E_MUX0_PIN 40  // Always Required
 //#define E_MUX1_PIN 42  // Needed for 3 to 8 inputs
 //#define E_MUX2_PIN 44  // Needed for 5 to 8 inputs
@@ -4137,10 +4137,10 @@
 #endif
 
 /**
-   * Using a sensor like the MMU2S
-   * This mode requires a MK3S extruder with a sensor at the extruder idler, like the MMU2S.
-   * See https://help.prusa3d.com/en/guide/3b-mk3s-mk2-5s-extruder-upgrade_41560, step 11
-   */
+ * Using a sensor like the MMU2S
+ * This mode requires a MK3S extruder with a sensor at the extruder idler, like the MMU2S.
+ * See https://help.prusa3d.com/en/guide/3b-mk3s-mk2-5s-extruder-upgrade_41560, step 11
+ */
 #if HAS_PRUSA_MMU2S
 #define MMU2_C0_RETRY 5 // Number of retries (total time = timeout*retries)
 
@@ -4164,16 +4164,16 @@
 #else
 
 /**
-     * MMU1 Extruder Sensor
-     *
-     * Support for a Průša (or other) IR Sensor to detect filament near the extruder
-     * and make loading more reliable. Suitable for an extruder equipped with a filament
-     * sensor less than 38mm from the gears.
-     *
-     * During loading the extruder will stop when the sensor is triggered, then do a last
-     * move up to the gears. If no filament is detected, the MMU2 can make some more attempts.
-     * If all attempts fail, a filament runout will be triggered.
-     */
+ * MMU1 Extruder Sensor
+ *
+ * Support for a Průša (or other) IR Sensor to detect filament near the extruder
+ * and make loading more reliable. Suitable for an extruder equipped with a filament
+ * sensor less than 38mm from the gears.
+ *
+ * During loading the extruder will stop when the sensor is triggered, then do a last
+ * move up to the gears. If no filament is detected, the MMU2 can make some more attempts.
+ * If all attempts fail, a filament runout will be triggered.
+ */
 //#define MMU_EXTRUDER_SENSOR
 #if ENABLED(MMU_EXTRUDER_SENSOR)
 #define MMU_LOADING_ATTEMPTS_NR 5 // max. number of attempts to load filament if first load fail
