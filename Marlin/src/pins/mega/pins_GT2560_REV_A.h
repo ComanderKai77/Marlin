@@ -97,6 +97,9 @@
 #ifndef FAN_PIN
 #define FAN_PIN 7
 #endif
+#ifndef FAN1_PIN
+#define FAN1_PIN HEATER_1_PIN
+#endif
 
 //
 // Misc. Functions
